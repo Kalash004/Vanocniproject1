@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Color from time</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body id="body">
+        <section id="timeholder">
+            <span id="time"></span>
+        </section>
+        <script>
+        // 24 hours to sec 86400sc
+        main();
+
+        function main() {
+            let current_time = 0;
+                current_time = getTime();
+                console.log(current_time);
+                showTime(current_time);
+                showColor(current_time);
+                setTimeout(main,1000);
+        }
+        
+        function getTime() {
+            let sec = new Date().getSeconds();
+            let minut = new Date().getMinutes();
+            let hours = new Date().getHours();
+            let time = {
+                hour: hours,
+                minutes: minut,
+                sec: sec
+            }
+            return time;
+        }
+
+        function showTime(time) {
+            let field = document.getElementById("time");
+            field.innerHTML = time.hour+":"+time.minutes+":"+time.sec;
+        }
+       
+        function showColor(time) {
+            let body = document.getElementById("body");
+            // unpacking object  
+            let hrs = time.hour;
+            let min = time.minutes;
+            let sec = time.sec;
+            if (hrs < 9) { hrs = 0+""+hrs};
+            if (min < 9) { min = 0+""+min};
+            if (sec < 9) { sec = 0+""+sec};
+            console.log("#"+hrs+""+min+""+sec)
+            body.style.background = "#"+hrs+""+min+""+sec;
+        }
+        </script>
+    </body>
+    <style>
+        #timeholder {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 15%;
+            text-align: center;
+            height: 500px;
+            font-family: 'Open Sans', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            font-size: 150px;
+        }
+        
+        span {
+            color: white;
+        }
+    </style>
+</html>
